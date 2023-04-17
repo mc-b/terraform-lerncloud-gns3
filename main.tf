@@ -12,29 +12,29 @@ resource "null_resource" "gns3" {
     local_file.template,
     local_file.script
   ]
-  
+
   provisioner "local-exec" {
-    command = "bash -x script.sh"
-  }  
+    command = "bash -x ${var.module}/script.sh"
+  }
 }
 
 # Hack weil local-exec nicht funktioniert mit {}
 resource "local_file" "script" {
-  filename = "script.sh"
+  filename = "${var.module}/script.sh"
   content  = <<EOF
 #!/bin/bash
 #
+cd ${var.module}/
 sudo mkisofs -output /opt/gns3/images/QEMU/${var.module}.iso -volid cidata -joliet -rock -input-charset utf-8 {user-data,meta-data}
 curl -X POST http://localhost:3080/v2/templates -d @template
 EOF
 }
 
-
 # Meta Data
- 
+
 resource "local_file" "meta-data" {
   content  = "instance-id: ${var.module}\nlocal-hostname: ${var.module}"
-  filename = "meta-data"
+  filename = "${var.module}/meta-data"
 }
 
 # Cloud-init Script
@@ -45,7 +45,7 @@ data "template_file" "userdata" {
 
 resource "local_file" "user-data" {
   content  = data.template_file.userdata.rendered
-  filename = "user-data"
+  filename = "${var.module}/user-data"
 }
 
 # GNS3 curl Data
@@ -66,5 +66,5 @@ resource "local_file" "template" {
     "usage": "${var.description}"
 }
 EOF
-  filename = "template"
+  filename = "${var.module}/template"
 }

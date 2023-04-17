@@ -12,6 +12,10 @@ resource "null_resource" "gns3" {
     local_file.template,
     local_file.script
   ]
+  
+  provisioner "local-exec" {
+    command = "bash -x script.sh"
+  }  
 }
 
 # Hack weil local-exec nicht funktioniert mit {}

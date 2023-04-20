@@ -63,6 +63,7 @@ resource "local_file" "template" {
     "qemu_path": "/bin/qemu-system-x86_64",
     "ram": ${var.memory * 1024},
     "template_type": "qemu",
+    "symbol": ":/symbols/affinity/circle/green/vm.svg",   
     "usage": "${var.description}"
 }
 EOF

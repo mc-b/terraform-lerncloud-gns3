@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: terraform-lerncloud-gns3
+  namespace: mc-b
+  description: LernCloud Terraform GNS3 Template Modul
+  tags: []
+  links:
+  - url: https://github.com/mc-b/terraform-lerncloud-gns3
+    title: Repository
+    icon: github
+  annotations:
+    github.com/project-slug: mc-b/terraform-lerncloud-gns3
+    backstage.io/source-location: url:https://github.com/mc-b/terraform-lerncloud-gns3
+    # backstage.io/techdocs-ref: url:https://github.com/mc-b/terraform-lerncloud-gns3
+spec:
+  type: infrastructure
+  lifecycle: production
+  owner: group:mc-b/mc-b
+  dependsOn:
+    - component:mc-b/lerncloud     

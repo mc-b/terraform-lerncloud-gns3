@@ -4,7 +4,11 @@ metadata:
   name: terraform-lerncloud-gns3
   namespace: mc-b
   description: LernCloud Terraform GNS3 Template Modul
-  tags: []
+  tags:
+  - terraform
+  - opentofu
+  - lerncloud  
+  - gns3
   links:
   - url: https://github.com/mc-b/terraform-lerncloud-gns3
     title: Repository
@@ -15,7 +19,7 @@ metadata:
     # backstage.io/techdocs-ref: url:https://github.com/mc-b/terraform-lerncloud-gns3
 spec:
   type: infrastructure
-  lifecycle: production
+  lifecycle: experimental
   owner: group:mc-b/mc-b
-  dependsOn:
-    - component:mc-b/lerncloud     
+  subcomponentOf: component:mc-b/terraform-provider-lerncloud
+
